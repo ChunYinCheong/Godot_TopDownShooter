@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="PrismMesh" id=1]
+size = Vector3( 50, 50, 50 )
+
+[sub_resource type="ConvexPolygonShape" id=7]
+points = PoolVector3Array( 0, 25, 25, 0, 25, -25, 0, 25, 25, 0, 25, -25, -25, -25, 25, 25, -25, -25, 25, -25, 25, -25, -25, -25, 0, 25, 25, 0, 25, -25, 0, 25, -25, 0, 25, 25, 25, -25, 25, -25, -25, -25, 25, -25, -25, -25, -25, 25, -25, -25, 25, 25, -25, 25, -25, -25, -25, 25, -25, -25 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 2, 50, 100 )
+
+[sub_resource type="ConvexPolygonShape" id=8]
+points = PoolVector3Array( -1, 25, 50, 1, 25, -50, 1, 25, 50, -1, 25, -50, -1, -25, 50, 1, -25, -50, 1, -25, 50, -1, -25, -50, 1, 25, 50, -1, 25, -50, 1, 25, -50, -1, 25, 50, 1, -25, 50, -1, -25, -50, 1, -25, -50, -1, -25, 50, 1, 25, 50, -1, -25, 50, -1, 25, 50, 1, -25, 50, 1, 25, -50, -1, -25, -50, -1, 25, -50, 1, -25, -50 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 100, 2, 100 )
+
+[sub_resource type="ConvexPolygonShape" id=6]
+points = PoolVector3Array( -50, 1, 50, 50, 1, -50, 50, 1, 50, -50, 1, -50, -50, -1, 50, 50, -1, -50, 50, -1, 50, -50, -1, -50, 50, 1, 50, -50, 1, -50, 50, 1, -50, -50, 1, 50, 50, -1, 50, -50, -1, -50, 50, -1, -50, -50, -1, 50, 50, 1, 50, -50, -1, 50, -50, 1, 50, 50, -1, 50, 50, 1, -50, -50, -1, -50, -50, 1, -50, 50, -1, -50 )
+
+[node name="White" type="Spatial"]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 6 )
