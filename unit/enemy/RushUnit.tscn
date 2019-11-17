@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://unit/Unit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://unit/enemy/RushUnit.gd" type="Script" id=2]
+[ext_resource path="res://common/DamageArea.tscn" type="PackedScene" id=3]
+
+
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.5, 2, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.992157, 0, 1, 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.25, 1, 0.25 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.3, 1, 0.3 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.25, 1, 0.25 )
+
+[node name="RushUnit" index="0" groups=[
+"Enemy",
+] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="1"]
+shape = SubResource( 3 )
+
+[node name="Area" type="Area" parent="." index="2"]
+collision_layer = 8
+collision_mask = 33
+
+[node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
+shape = SubResource( 4 )
+
+[node name="DestructibleArea" parent="." index="3" instance=ExtResource( 3 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="DestructibleArea" index="1"]
+shape = SubResource( 5 )
+[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="die" from="DestructibleArea" to="." method="_on_DestructibleArea_die"]

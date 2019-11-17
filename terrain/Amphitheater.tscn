@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="Amphitheater" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner"]
+radius = 20.0
+height = 10.0
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+radius = 19.0
+height = 10.0

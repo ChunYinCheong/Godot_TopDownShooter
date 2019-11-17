@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="PrismMesh" id=1]
+size = Vector3( 10, 10, 10 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 0, 5, 5, 0, 5, -5, 0, 5, 5, 0, 5, -5, -5, -5, 5, 5, -5, -5, 5, -5, 5, -5, -5, -5, 0, 5, 5, 0, 5, -5, 0, 5, -5, 0, 5, 5, 5, -5, 5, -5, -5, -5, 5, -5, -5, -5, -5, 5, -5, -5, 5, 5, -5, 5, -5, -5, -5, 5, -5, -5 )
+
+[node name="Prism" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 2 )

@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scene/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 800, 1, 1 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 9.8, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 1.0
+angular_velocity = 3.22853e-031
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 1.0
+linear_accel = 20.0
+linear_accel_random = 1.0
+tangential_accel_random = 1.0
+damping = 5.0
+damping_random = 1.0
+angle = 720.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 1.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 800, -20 )
+amount = 5000
+lifetime = 30.0
+randomness = 1.0
+visibility_rect = Rect2( -800, 20, 1600, 900 )
+process_material = SubResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -55.5
+margin_top = -36.0
+margin_right = 55.5
+margin_bottom = 36.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+margin_right = 111.0
+margin_bottom = 72.0
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 64 )
+patch_margin_bottom = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 111.0
+margin_bottom = 72.0
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_right = 111.0
+margin_bottom = 20.0
+text = "Start / Continue"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 111.0
+margin_bottom = 44.0
+text = "Options"
+
+[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 111.0
+margin_bottom = 68.0
+text = "Exit"
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 111.0
+margin_bottom = 72.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Menu"
+anims/Fade = SubResource( 2 )
+anims/Menu = SubResource( 3 )
+
+[node name="Fade" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

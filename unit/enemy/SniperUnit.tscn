@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://unit/Unit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://unit/enemy/SniperUnit.gd" type="Script" id=2]
+[ext_resource path="res://common/DamageArea.tscn" type="PackedScene" id=3]
+
+
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0.607843, 0, 1 )
+
+[sub_resource type="CylinderMesh" id=2]
+material = SubResource( 1 )
+top_radius = 0.25
+bottom_radius = 0.25
+
+[sub_resource type="CylinderShape" id=3]
+radius = 0.25
+
+[node name="SniperUnit" index="0" groups=[
+"Enemy",
+] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="1"]
+shape = SubResource( 3 )
+
+[node name="Position3D" type="Position3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+
+[node name="DestructibleArea" parent="." index="3" instance=ExtResource( 3 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="DestructibleArea" index="1"]
+shape = SubResource( 3 )
+[connection signal="die" from="DestructibleArea" to="." method="_on_DestructibleArea_die"]
